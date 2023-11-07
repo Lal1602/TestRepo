@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+.confetti-container {
+  width: auto;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+.confetti {
+  position: absolute;
+  opacity: 0.7;
+  animation: confetti-rain linear infinite;
+}
+
+@keyframes confetti-rain {
+  0% {
+    transform: translateY(-100%) rotate(0);
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+  }
+}
+
+
+    </style>
+</head>
+<body>
+  <div class="confetti-container"></div>
+
+  <script>
+const container = document.querySelector('.confetti-container');
+const colors = ['#27374D', '#526D82', '#9DB2BF', '#DDE6ED', '#394867', '#212A3E']; // Array of colors
+const shapes = ['circle', 'triangle', 'square']; // Array of shapes
+
+function createConfetti() {
+  const confetti = document.createElement('span');
+  confetti.className = 'confetti';
+  
+  const xPos = Math.random() * window.innerWidth;
+  const yPos = -100;
+  const size = Math.floor(Math.random() * 20) + 10; // Random size between 10 and 30 pixels
+  const speed = Math.random() * 5 + 2; // Random speed between 2 and 7
+  const color = colors[Math.floor(Math.random() * colors.length)]; // Random color from the colors array
+  const shape = shapes[Math.floor(Math.random() * shapes.length)]; // Random shape from the shapes array
+  
+  confetti.style.left = xPos + 'px';
+  confetti.style.top = yPos + 'px';
+  confetti.style.width = size + 'px';
+  confetti.style.height = size + 'px';
+  confetti.style.backgroundColor = color;
+  confetti.style.animationDuration = speed + 's';
+  confetti.style.borderRadius = shape === 'circle' ? '50%' : '0%';
+  
+  container.appendChild(confetti);
+  
+  setTimeout(() => {
+    confetti.remove();
+  }, speed * 1000);
+}
+
+setInterval(createConfetti, 20);
+
+
+    </script>
+</body>
+</html>
